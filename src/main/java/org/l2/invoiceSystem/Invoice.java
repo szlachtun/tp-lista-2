@@ -26,7 +26,7 @@ class Invoice {
         var invoiceReader = new Scanner(System.in);
         var tempPositionList = new ArrayList<Position>();
 
-        System.out.print("Enter invoice recipient (\"cancel\" - abandon invoice: ");
+        System.out.print("Enter invoice recipient (\"cancel\" - abandon invoice): ");
         String tempCompanyName = invoiceReader.nextLine();
         if (tempCompanyName.equalsIgnoreCase("cancel")) {
             return Optional.empty();

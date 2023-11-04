@@ -37,7 +37,9 @@ class Position {
         System.out.println("Enter product VAT in percents (without '%'): ");
         int tempProductVatPer = Integer.parseInt(positionReader.nextLine());
 
-        var tempPosition = new Position(tempProductName, tempProductNetPrice, tempProductCount, tempProductVatPer);
+        double tempProductFinalNetPrice = tempProductNetPrice  * tempProductCount;
+
+        var tempPosition = new Position(tempProductName, tempProductFinalNetPrice, tempProductCount, tempProductVatPer);
         do {
             System.out.print("Entered position is:\n" + tempPosition + "Add the position to invoice? y/n: ");
             String command = positionReader.nextLine();

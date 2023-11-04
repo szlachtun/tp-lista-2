@@ -5,5 +5,7 @@ public class Main {
     public static void main(String[] args) {
         var invoiceIssuer = new InvoiceIssuer();
         invoiceIssuer.issueInvoice();
+        invoiceIssuer.showInvoices();
+        invoiceIssuer.showInvoiceDetails(0);
     }
 }
