@@ -11,6 +11,10 @@ class Invoice {
     private final LocalDate invoiceTerm;
     private final ArrayList<Position> positionList;
 
+    int getInvoiceID() { return this.invoiceID; }
+    String getCompanyName() { return this.companyName; }
+    LocalDate getInvoiceTerm() { return this.invoiceTerm; }
+
     Invoice(int invoiceID, String companyName, LocalDate invoiceTerm, ArrayList<Position> positionList) {
         this.invoiceID = invoiceID;
         this.companyName = companyName;
@@ -44,7 +48,17 @@ class Invoice {
     }
 
     void printInvoiceDetails() {
-
+        System.out.printf("""
+                --------------------------------------------------------------------------------
+                Invoice ID: %d
+                Recipient company: %s;  Payment term: %s
+                                
+                Product name | Count | Net price | VAT | Gross price
+                \n""", this.invoiceID, this.companyName, this.invoiceTerm);
+        for (var position : positionList) {
+            System.out.println(position);
+        }
+        System.out.println("--------------------------------------------------------------------------------\n");
     }
 
     @Override
