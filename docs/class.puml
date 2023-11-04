@@ -1,0 +1,43 @@
+@startuml
+class InvoiceBase {
+    -invoiceList : ArrayList<Invoice>
+    -nextInvoiceID : int
+
+    ~InvoiceBase() : Invoice
+    ~getInvoicesList() : Invoice
+    ~addInvoice() : void
+    ~getInvoiceDetails(invoiceID : int)
+}
+
+class Invoice {
+    ~{static}composeInvoice() : void
+    -positionList : ArrayList<Position>
+    -companyName : final String
+    -invoiceTerm : final String
+
+    -Invoice(positionList, companyName, invoiceTerm) : Invoice
+    ~printInvoiceDetails() : void
+    ~toString() : String
+}
+
+class Position <<Record>> {
+    -productCount : final int
+    -productVat : final int
+    -productGrossPrice : final double
+    -productName : final String
+    -productNetPrice : final double
+
+    ~Position(productName, productGrossPrice, productCount, productVat) : Position
+    -calculateGrossPrice(productNetPrice, productVat)
+}
+
+class InvoiceIssuer {
+    +issueInvoice() : void
+    +showInvoices() : void
+    +showInvoiceDetails(invoiceID : int) : void
+}
+
+InvoiceBase -- InvoiceIssuer
+InvoiceBase o-- Invoice
+Invoice *-- Position
+@enduml

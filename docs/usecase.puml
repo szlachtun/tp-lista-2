@@ -1,0 +1,5 @@
+@startuml
+Issuer -> (Issue invoice)
+Issuer --> (Cancel invoice)
+Issuer --> (Show invoice)
+@enduml
