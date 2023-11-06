@@ -7,9 +7,12 @@ class InvoiceBase {
     ~getInvoicesList() : void
     ~addInvoice() : void
     ~getInvoiceDetails(invoiceId : int) : void
+    ~bumpNextInvoiceId() : void
+    ~getInvoice(invoiceId : int) : Invoice
+    ~getInvoiceListSize() : int
 }
 
-class Invoice {
+class Invoice <<Record>> {
     -positionList : final ArrayList<Position>
     -companyName : final String
     -invoiceTerm : final LocalDate
@@ -37,9 +40,11 @@ class InvoiceIssuer {
     -invoiceBase() : InvoiceBase
 
     +InvoiceIssuer() : InvoiceIssuer
-    +issueInvoice() : void
-    +showInvoices() : void
-    +showInvoiceDetails(invoiceId : int) : void
+    ~issueInvoice() : void
+    ~showInvoices() : void
+    ~showInvoiceDetails(invoiceId : int) : void
+    ~exportInvoice(invoiceId : int) : void
+    +run() : void
 }
 
 InvoiceBase -- InvoiceIssuer

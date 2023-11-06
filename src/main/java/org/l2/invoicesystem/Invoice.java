@@ -5,31 +5,8 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
 
-class Invoice {
-  private final int invoiceId;
-  private final String companyName;
-  private final LocalDate invoiceTerm;
-  private final ArrayList<Position> positionList;
-
-  int getInvoiceId() {
-    return this.invoiceId;
-  }
-
-  String getCompanyName() {
-    return this.companyName;
-  }
-
-  LocalDate getInvoiceTerm() {
-    return this.invoiceTerm;
-  }
-
-  Invoice(int invoiceId, String companyName, LocalDate invoiceTerm,
-          ArrayList<Position> positionList) {
-    this.invoiceId = invoiceId;
-    this.companyName = companyName;
-    this.invoiceTerm = invoiceTerm;
-    this.positionList = positionList;
-  }
+record Invoice(int invoiceId, String companyName, LocalDate invoiceTerm,
+               ArrayList<Position> positionList) {
 
   static Optional<Invoice> invoiceFactory(int invoiceId) {
     var invoiceReader = new Scanner(System.in);

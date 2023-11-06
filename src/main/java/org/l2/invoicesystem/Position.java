@@ -2,7 +2,9 @@ package org.l2.invoicesystem;
 
 import java.util.Optional;
 import java.util.Scanner;
+import lombok.Getter;
 
+@Getter
 class Position {
   private final String productName;
   private final double productNetPrice;
@@ -21,28 +23,52 @@ class Position {
   static Optional<Position> positionFactory() {
     var positionReader = new Scanner(System.in);
 
-    System.out.println("Enter product name ('finish' - cancel creation): ");
+    System.out.print("Enter product name ('finish' - cancel creation): ");
     String tempProductName = positionReader.nextLine();
 
     if (tempProductName.equals("finish")) {
       return Optional.empty();
     }
 
-    System.out.println("Enter product net price: ");
-    double tempProductNetPrice = Double.parseDouble(positionReader.nextLine());
+    double tempProductNetPrice;
+    while (true) {
+      System.out.print("Enter product net price: ");
+      try {
+        tempProductNetPrice = Double.parseDouble(positionReader.nextLine());
+        break;
+      } catch (IllegalArgumentException ex) {
+        System.out.println("Wrong value");
+      }
+    }
 
-    System.out.println("Enter product count: ");
-    int tempProductCount = Integer.parseInt(positionReader.nextLine());
+    int tempProductCount;
+    while (true) {
+      System.out.print("Enter product count: ");
+      try {
+        tempProductCount = Integer.parseInt(positionReader.nextLine());
+        break;
+      } catch (IllegalArgumentException ex) {
+        System.out.println("Wrong value");
+      }
+    }
 
-    System.out.println("Enter product VAT in percents (without '%'): ");
-    int tempProductVatPer = Integer.parseInt(positionReader.nextLine());
+    int tempProductVatPer;
+    while (true) {
+      System.out.print("Enter product VAT in percents (without '%'): ");
+      try {
+        tempProductVatPer = Integer.parseInt(positionReader.nextLine());
+        break;
+      } catch (IllegalArgumentException ex) {
+        System.out.println("Wrong value");
+      }
+    }
 
-    double tempProductFinalNetPrice = tempProductNetPrice * tempProductCount;
+    double tempProductFinalNetPrice = Math.round(tempProductNetPrice * tempProductCount * 100.0) / 100.0;
 
     var tempPosition = new Position(tempProductName, tempProductFinalNetPrice,
         tempProductCount, tempProductVatPer);
     do {
-      System.out.print("Entered position is:\n" + tempPosition
+      System.out.print("Entered position is:\n"+ "|Name|Count|Net Price|VAT, %|Gross Price\n" + tempPosition
           + "Add the position to invoice? y/n: ");
       String command = positionReader.nextLine();
 

@@ -14,8 +14,8 @@ class InvoiceBase {
   void getInvoicesList() {
     System.out.println("ID | Company | Invoice term");
     for (var invoice : this.invoiceList) {
-      System.out.printf("%2d | %s | %s\n", invoice.getInvoiceId(), invoice.getCompanyName(),
-          invoice.getInvoiceTerm().toString());
+      System.out.printf("%2d | %s | %s\n", invoice.invoiceId(), invoice.companyName(),
+          invoice.invoiceTerm().toString());
     }
   }
 
@@ -35,6 +35,14 @@ class InvoiceBase {
 
   private void bumpNextInvoiceId() {
     this.nextInvoiceId += 1;
+  }
+
+  int getInvoiceListSize() {
+    return invoiceList.size();
+  }
+
+  Invoice getInvoice(int invoiceId) {
+    return invoiceList.get(invoiceId);
   }
 
 }
