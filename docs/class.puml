@@ -1,12 +1,12 @@
 @startuml
 class InvoiceBase {
     -invoiceList : ArrayList<Invoice>
-    -nextInvoiceID : int
+    -nextInvoiceId : int
 
     ~InvoiceBase() : Invoice
     ~getInvoicesList() : void
     ~addInvoice() : void
-    ~getInvoiceDetails(invoiceID : int) : void
+    ~getInvoiceDetails(invoiceId : int) : void
 }
 
 class Invoice {
@@ -14,8 +14,8 @@ class Invoice {
     -companyName : final String
     -invoiceTerm : final LocalDate
 
-    ~Invoice(invoiceID : int, companyName : String, invoiceTerm : LocalDate, positionList : ArrayList<Position>) : Invoice
-    ~{static}invoiceFactory(invoiceID : int) : Optional<Invoice>
+    ~Invoice(invoiceId : int, companyName : String, invoiceTerm : LocalDate, positionList : ArrayList<Position>) : Invoice
+    ~{static}invoiceFactory(invoiceId : int) : Optional<Invoice>
     ~printInvoiceDetails() : void
     +toString() : String
 }
@@ -39,7 +39,7 @@ class InvoiceIssuer {
     +InvoiceIssuer() : InvoiceIssuer
     +issueInvoice() : void
     +showInvoices() : void
-    +showInvoiceDetails(invoiceID : int) : void
+    +showInvoiceDetails(invoiceId : int) : void
 }
 
 InvoiceBase -- InvoiceIssuer

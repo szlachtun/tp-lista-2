@@ -1,11 +1,18 @@
 package org.l2.main;
-import org.l2.invoiceSystem.InvoiceIssuer;
 
+import org.l2.invoicesystem.InvoiceIssuer;
+
+/**
+ * invoicesystem usage example.
+  */
 public class Main {
-    public static void main(String[] args) {
-        var invoiceIssuer = new InvoiceIssuer();
-        invoiceIssuer.issueInvoice();
-        invoiceIssuer.showInvoices();
-        invoiceIssuer.showInvoiceDetails(0);
-    }
+  /**
+  * program entry point.
+   */
+  public static void main(String[] args) {
+    var invoiceIssuer = new InvoiceIssuer();
+    invoiceIssuer.issueInvoice();
+    invoiceIssuer.showInvoices();
+    invoiceIssuer.showInvoiceDetails(0);
+  }
 }
