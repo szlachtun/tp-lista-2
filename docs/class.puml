@@ -4,34 +4,39 @@ class InvoiceBase {
     -nextInvoiceID : int
 
     ~InvoiceBase() : Invoice
-    ~getInvoicesList() : Invoice
+    ~getInvoicesList() : void
     ~addInvoice() : void
-    ~getInvoiceDetails(invoiceID : int)
+    ~getInvoiceDetails(invoiceID : int) : void
 }
 
 class Invoice {
-    ~{static}composeInvoice() : void
-    -positionList : ArrayList<Position>
+    -positionList : final ArrayList<Position>
     -companyName : final String
-    -invoiceTerm : final String
+    -invoiceTerm : final LocalDate
 
-    -Invoice(positionList, companyName, invoiceTerm) : Invoice
+    ~Invoice(invoiceID : int, companyName : String, invoiceTerm : LocalDate, positionList : ArrayList<Position>) : Invoice
+    ~{static}invoiceFactory(invoiceID : int) : Optional<Invoice>
     ~printInvoiceDetails() : void
-    ~toString() : String
+    +toString() : String
 }
 
-class Position <<Record>> {
+class Position {
+    -productName : final String
+    -productNetPrice : final double
     -productCount : final int
     -productVat : final int
     -productGrossPrice : final double
-    -productName : final String
-    -productNetPrice : final double
 
-    ~Position(productName, productGrossPrice, productCount, productVat) : Position
-    -calculateGrossPrice(productNetPrice, productVat)
+    ~Position(productName : String, productGrossPrice : double, productCount : int, productVatPer : int) : Position
+    ~{static}positionFactory() : Optional<Position>
+    -calculateGrossPrice(productNetPrice : double, productVatPer: int)
+    +toString() : String
 }
 
 class InvoiceIssuer {
+    -invoiceBase() : InvoiceBase
+
+    +InvoiceIssuer() : InvoiceIssuer
     +issueInvoice() : void
     +showInvoices() : void
     +showInvoiceDetails(invoiceID : int) : void
